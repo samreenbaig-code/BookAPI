@@ -1,19 +1,15 @@
 <?php
 
-include 'connect.php';
+header("Access-Control-Allow-Origin: *");
 
-$data = json_decode(file_get_contents("php://input"));
+include "db.php";
 
-$id = $data->id;
+$id = $_GET['id'];
 
-$sql = "DELETE FROM books WHERE id = $id";
+$sql = "DELETE FROM books WHERE id=$id";
 
-if ($conn->query($sql)) {
-    echo json_encode(["message" => "Book deleted"]);
-} else {
-    echo json_encode(["error" => $conn->error]);
-}
+$conn->query($sql);
 
-$conn->close();
+echo json_encode(["message"=>"Deleted"]);
 
 ?>
