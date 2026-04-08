@@ -1,6 +1,7 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
+<<<<<<< HEAD
 
 include "db.php";
 
@@ -19,5 +20,23 @@ VALUES('$title','$author','$description','$imageName')";
 $conn->query($sql);
 
 echo json_encode(["message"=>"Book Added"]);
+=======
+header("Access-Control-Allow-Headers: *");
+
+include "db.php";
+
+$data = json_decode(file_get_contents("php://input"));
+
+$title = $data->title;
+$author = $data->author;
+$description = $data->description;
+
+$sql = "INSERT INTO books (title, author, description)
+VALUES ('$title','$author','$description')";
+
+$conn->query($sql);
+
+echo json_encode(["message"=>"Book added"]);
+>>>>>>> 608be83 (Added PHP backend files for Book API)
 
 ?>
